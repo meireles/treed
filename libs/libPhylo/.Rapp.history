@@ -1,0 +1,12 @@
+require(phyext,quietly=T)#
+require(phylobase,quietly=T)
+file = "~/InTheCloud/Dropbox/3dTrees/TreeD_test/trees/chloro_anno2.tree"
+file
+x <- readLines(file, warn = F)
+x <- gsub("\t","",x)#
+  # Figure out where the tree block is and cut the rest off#
+  treeblockStart <- grep("begin trees;",x,ignore.case=T) + 1 # the + 1 skips "begin trees;" itself#
+  treeblockEnd <- grep("end;",x, ignore.case=T)#
+  treeblockEnd <- treeblockEnd[ which(treeblockEnd>treeblockStart)[1]  ] - 1  # skips "end;" itself#
+  x <- x[ seq(treeblockStart, treeblockEnd) ]
+x
